@@ -1,7 +1,7 @@
 {
-  "name": "outside",
+  "name": "thegame",
   "version": "2.0.0",
-  "description": "Boilerplate for WDD 330 SleepOutside project",
+  "description": "The Game Final Project",
   "main": "main.js",
   "scripts": {
     "start": "vite",
@@ -31,5 +31,8 @@
     "last 3 opera versions",
     "last 3 ios_saf versions",
     "last 3 safari versions"
-  ]
+  ],
+  "dependencies": {
+    "fast-xml-parser": "^5.0.9"
+  }
 }
