@@ -14,9 +14,22 @@ export default defineConfig({
       },
     },
   },
-  esbuild: { 
+  esbuild: {
     supported: {
       "top-level-await": true,
+    },
+  },
+
+  // Add proxy configuration
+  server: {
+    proxy: {
+      // When you make a request to /api, Vite will proxy it to the BoardGameGeek API
+      "/api": {
+        target: "https://boardgamegeek.com",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
     },
   },
 });

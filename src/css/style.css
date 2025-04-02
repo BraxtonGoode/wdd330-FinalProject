@@ -1,11 +1,11 @@
 :root {
-  --font-metal-mania: "Metal Mania", system-ui; 
+  --font-metal-mania: "Metal Mania", system-ui;
   /* colors */
-  --primary-color: #E6AA68 ;
-  --secondary-color: #4F3824;
-  --tertiary-color: #D33E43;
+  --primary-color: #e6aa68;
+  --secondary-color: #4f3824;
+  --tertiary-color: #d33e43;
   --light-grey: #d0d0d0;
-  --dark-grey: #303030;  
+  --dark-grey: #303030;
 
   /* sizes */
   --font-base: 18px;
@@ -23,28 +23,29 @@ body {
   background-color: var(--light-grey);
 }
 img {
-  max-width: 100%;
+  max-width: 80%;
+  transition: max-width 0.3s ease;
 }
 /* header styling */
 header {
   display: flex;
-  flex-direction: column;  
-  align-items: center;     
+  flex-direction: column;
+  align-items: center;
   padding: 0 10px;
 }
 
 .logo {
   display: flex;
-  align-items: center;     
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 10px;     
+  margin-bottom: 10px;
 }
 
 .logo img {
   width: 60px;
   height: 60px;
-  margin-right: 10px;      
+  margin-right: 10px;
 }
 
 .logo a {
@@ -57,8 +58,7 @@ header {
 .navbar {
   width: 100%;
   display: flex;
-  justify-content: space-evenly; 
-  
+  justify-content: space-evenly;
 }
 
 .navbar ul {
@@ -87,7 +87,50 @@ h1 {
   color: var(--tertiary-color);
   text-align: center;
 }
+
+/* Top rated board game  */
+#gameList {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#topBoardGame {
+  border: 3px solid var(--primary-color);
+  max-width: 300px;
+  min-height: 400px;
+  flex: 1 1 300px;
+  box-sizing: border-box;
+  padding: 0%;
+}
+.gameImage {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+  transform: scale(1); /* Default size */
+}
+
+.gameImage:hover {
+  transform: scale(1.1); /* Enlarges the image by 10% */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect for emphasis */
+}
+
+/* individual board game pages */
+.indivBoardGame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.indivBoardGame p {
+  text-align: center;
+  max-width: 500px;
+}
 /* footer styling */
-.footer{
+.footer {
   text-align: center;
 }
