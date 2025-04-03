@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/proxy/*"
-  to = "https://boardgamegeek.com/:splat"
+  to = "https://boardgamegeek.com/xmlapi2/:splat"
   status = 200
   force = true
   headers = { X-From = "Netlify" }
