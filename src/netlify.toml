@@ -1,16 +1,9 @@
 [[redirects]]
-  from = "/api/proxy/*"
-  to = "https://boardgamegeek.com/xmlapi2/:splat"
-  status = 200
-  force = true
-  headers = { X-From = "Netlify" }
-  
-  [[redirects]]
-  from = "/api/proxy/xmlapi/*"
-  to = "https://boardgamegeek.com/xmlapi/:splat"
-  status = 200
-  force = true
-  headers = { X-From = "Netlify" }
+from = "/api/proxy/xmlapi/*"
+to = "https://boardgamegeek.com/xmlapi/:splat"
+status = 200
+force = true
+headers = { X-From = "Netlify" }
 
 [[headers]]
   for = "/*"

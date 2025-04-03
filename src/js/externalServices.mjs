@@ -1,7 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
 
 
-const xmlapi2URL = import.meta.env.VITE_API_URL_BASE;
 const xmlapiURL = import.meta.env.VITE_API_URL_NON;
 
 
