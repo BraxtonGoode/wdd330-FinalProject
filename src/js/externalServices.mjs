@@ -1,6 +1,10 @@
 import { XMLParser } from 'fast-xml-parser';
 
-const baseURL = '/api/xmlapi2'; // Use '/api' to hit the Vite proxy
+
+const xmlapi2URL = import.meta.env.VITE_API_URL_BASE;
+const xmlapiURL = import.meta.env.VITE_API_URL_NON;
+
+// const baseURL = '/api/xmlapi2'; 
 
 export default class ExternalServices {
     constructor() {
@@ -10,7 +14,7 @@ export default class ExternalServices {
     async fetchTopTwentyGames() {
         try {
             // Now the fetch request uses the Vite proxy path
-            const response = await fetch(`${baseURL}/hot?boardgame`);
+            const response = await fetch(`${xmlapi2URL}/hot?boardgame`);
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -45,7 +49,7 @@ export default class ExternalServices {
     async fetchGameById(gameId) {
         try {
             // Use the proxy path for game by ID as well
-            const response = await fetch(`/api/xmlapi/boardgame/${gameId}`);
+            const response = await fetch(`${xmlapiURL}/boardgame/${gameId}`);
 
 
             console.log("Fetching game by ID:", gameId);
