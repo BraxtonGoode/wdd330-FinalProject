@@ -9,7 +9,7 @@ document.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("gameImage")) {
     const hiddenInput = e.target
       .closest("#topBoardGame")
-      .querySelector('input[type="hidden"]');
+      .querySelector("input[type=\"hidden\"]");
 
     // Get the value of the hidden input (game ID)
     const gameId = hiddenInput ? hiddenInput.value : null;
