@@ -14,7 +14,7 @@ export default class ExternalServices {
     async fetchTopTwentyGames() {
         try {
             // Now the fetch request uses the Vite proxy path
-            const response = await fetch(`${xmlapi2URL}/hot?boardgame`);
+            const response = await fetch(`${xmlapi2URL}xmlapi2/hot?boardgame`);
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -50,7 +50,7 @@ export default class ExternalServices {
         try {
             console.log(xmlapiURL)
             // Use the proxy path for game by ID as well
-            const response = await fetch(`${xmlapiURL}/boardgame/${gameId}`);
+            const response = await fetch(`${xmlapiURL}xmlapi/boardgame/${gameId}`);
             console.log('Response status:', response.status);
 
 
