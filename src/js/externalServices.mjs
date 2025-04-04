@@ -47,7 +47,6 @@ export default class ExternalServices {
 
     async fetchGameById(gameId) {
         try {
-            console.log(xmlapiURL)
             // Use the proxy path for game by ID as well
             const response = await fetch(`/api/proxyBoardGame?gameId=${gameId}`);
             console.log('Response status:', response.status);
