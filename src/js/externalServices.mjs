@@ -49,7 +49,7 @@ export default class ExternalServices {
         try {
             console.log(xmlapiURL)
             // Use the proxy path for game by ID as well
-            const response = await fetch(`${xmlapiURL}boardgame/${gameId}`);
+            const response = await fetch(`${xmlapiURL}xmlapi/boardgame/${gameId}`);
             console.log('Response status:', response.status);
 
 
