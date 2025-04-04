@@ -1,7 +1,7 @@
 import { XMLParser } from 'fast-xml-parser';
 
 
-const xmlapiURL = import.meta.env.VITE_API_URL_NON;
+// const xmlapiURL = import.meta.env.VITE_API_URL_NON;
 
 
 export default class ExternalServices {
@@ -49,7 +49,7 @@ export default class ExternalServices {
         try {
             console.log(xmlapiURL)
             // Use the proxy path for game by ID as well
-            const response = await fetch(`${xmlapiURL}xmlapi/boardgame/${gameId}`);
+            const response = await fetch(`/api/proxyBoardGame?gameId=${gameId}`);
             console.log('Response status:', response.status);
 
 
