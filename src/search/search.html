@@ -13,14 +13,32 @@
       href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap"
       rel="stylesheet"
     />
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search"
+  />
   </head>
   <body>
     <header class="divider"></header>
     <main class="divider">
       <section class="searchGames">
-        <div>
+        <div id="searchContainer">
           <h1>Search For Game</h1>
+          <form class="searchForm">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search by name"
+            />
+            <button type="button" id="searchButton">
+              <span class="material-symbols-outlined"> search </span>
+            </button>
+          </form>
         </div>
+      </section>
+      <section class="gameInventory">
+
       </section>
     </main>
     <footer class="footer"></footer>

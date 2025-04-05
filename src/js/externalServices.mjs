@@ -48,10 +48,34 @@ export default class ExternalServices {
         try {
             // Use the proxy path for game by ID as well
             const response = await fetch(`${xmlapiURL}boardgame/${gameId}`);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Parse the XML response text into JSON using fast-xml-parser
+            const xmlText = await response.text();
+
+            // Convert XML to JSON
+            const newJson = await convertXMLtoJSON(xmlText);
+
+            // Log the parsed result (JSON format)
+            return newJson
+
+        } catch (error) {
+            console.error("Error fetching game by ID:", error);
+        }
+    }
+    async fetchGameByName(searchValue) {
+        try {
+            // Use the proxy path for game by ID as well
+
+            const response = await fetch(`${xmlapiURL}search?search=${searchValue}`);
+            console.log(`${xmlapiURL}search?/search?=${searchValue}`);
             console.log('Response status:', response.status);
 
 
-            console.log("Fetching game by ID:", gameId);
+            console.log("Fetching game by name:", searchValue);
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');

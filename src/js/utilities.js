@@ -126,8 +126,77 @@ export async function gameById() {
     console.error("Error fetching game details:", error);
   }
 }
-
+// Function to get the game ID from the URL
 function getGameIdFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
+}
+
+// Function to get the game name
+export async function gameByName(searchValue) {
+  try {
+    console.log("Searching for game:", searchValue);
+    const games = await service.fetchGameByName(searchValue);
+    let cardsHTML = "";
+    
+    
+
+
+    // Loop through the games and create the HTML for each card
+    for (let i = 0; i < 10; i++) {
+      const gameitem = games.boardgames.boardgame[i];
+      if (!gameitem) {
+        console.log("No game item found at index:", i);
+        continue; // Skip to the next iteration if no game item is found
+      }
+      const gameid = gameitem["@_objectid"];
+
+      const game = await service.fetchGameById(gameid);
+
+
+      // Generate the HTML for the current game
+      const gameHtml = searchCardTemplate(game);
+
+      // Append the generated HTML to the cardsHtml string
+      cardsHTML += gameHtml;
+    }
+  
+    // Append the cards to an element in your HTML
+    const cardsContainer = document.querySelector(".gameInventory");
+    if (cardsContainer) {
+    cardsContainer.innerHTML = cardsHTML;
+    console.log("Cards have been inserted into the DOM.");
+    } else {
+    console.log("Cards container not found.");
+    }
+  } catch (error) {
+    console.error("Error fetching game details:", error);
+  }
+}
+
+
+function searchCardTemplate(game) {
+  console.log("Game object:", game);
+  // / Check if the name exists and is an array
+  const gameNameObj = Array.isArray(game.boardgames?.boardgame?.name)
+    ? game.boardgames?.boardgame?.name.find((n) => n["@_primary"] === "true")
+    : game.boardgames?.boardgame?.name;
+
+  // If name is found, use the #text value
+  const gameName = gameNameObj ? gameNameObj["#text"] : "Unknown Game";
+
+  // Straightforward items
+  const thumbnail = game.boardgames.boardgame.thumbnail;
+  const gameId = game.boardgames.boardgame["@_objectid"];
+
+
+  const string = `
+    <div class="searchBoardGame">
+      <h1>${gameName}</h1>
+      <a href="/boardgame/game.html?id=${gameId}"> 
+      <img class="gameImage" src="${thumbnail}" alt="${gameName}">
+      </a>
+    </div>
+  `;
+  return string;
 }

@@ -130,6 +130,43 @@ h1 {
   text-align: center;
   max-width: 500px;
 }
+/* search game */
+#searchContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+}
+.gameInventory {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.searchBoardGame {
+  border: 3px solid var(--primary-color);
+  max-width: 300px;
+  min-height: 400px;
+  flex: 1 1 300px;
+  box-sizing: border-box;
+  padding: 0%;
+}
+.gameImage {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+  transform: scale(1); /* Default size */
+}
+
+.gameImage:hover {
+  transform: scale(1.1); /* Enlarges the image by 10% */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect for emphasis */
+}
 /* footer styling */
 .footer {
   text-align: center;
