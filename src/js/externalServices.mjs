@@ -36,8 +36,6 @@ export default class ExternalServices {
                 year: game.yearpublished["@_value"] // Access the year published
             }));
 
-            console.log("Formatted games:", formattedGames); // Check the extracted data
-
             return formattedGames;
         } catch (error) {
             console.error("Error fetching top 20 games:", error);
@@ -71,11 +69,6 @@ export default class ExternalServices {
             // Use the proxy path for game by ID as well
 
             const response = await fetch(`${xmlapiURL}search?search=${searchValue}`);
-            console.log(`${xmlapiURL}search?/search?=${searchValue}`);
-            console.log('Response status:', response.status);
-
-
-            console.log("Fetching game by name:", searchValue);
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');

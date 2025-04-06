@@ -167,6 +167,20 @@ h1 {
   transform: scale(1.1); /* Enlarges the image by 10% */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect for emphasis */
 }
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.pagination button{
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
 /* footer styling */
 .footer {
   text-align: center;

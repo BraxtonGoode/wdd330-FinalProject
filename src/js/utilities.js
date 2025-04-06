@@ -1,5 +1,9 @@
+// Global imports and variables
 import ExternalServices from "./externalServices.mjs";
 const service = new ExternalServices();
+let currentPage = 1; // Track the current page
+
+
 
 async function loadTemplate(path) {
   const response = await fetch(path);
@@ -76,7 +80,7 @@ export async function topTwentyCards() {
   }
 }
 
-function indivCardTemplate(game) {
+export function indivCardTemplate(game) {
   // / Check if the name exists and is an array
   const gameNameObj = Array.isArray(game.boardgames?.boardgame?.name)
     ? game.boardgames?.boardgame?.name.find((n) => n["@_primary"] === "true")
@@ -132,48 +136,92 @@ function getGameIdFromURL() {
   return params.get("id");
 }
 
-// Function to get the game name
+
+
 export async function gameByName(searchValue) {
   try {
-    console.log("Searching for game:", searchValue);
-    const games = await service.fetchGameByName(searchValue);
-    let cardsHTML = "";
-    
-    
-
-
-    // Loop through the games and create the HTML for each card
-    for (let i = 0; i < 10; i++) {
-      const gameitem = games.boardgames.boardgame[i];
-      if (!gameitem) {
-        console.log("No game item found at index:", i);
-        continue; // Skip to the next iteration if no game item is found
-      }
-      const gameid = gameitem["@_objectid"];
-
-      const game = await service.fetchGameById(gameid);
-
-
-      // Generate the HTML for the current game
-      const gameHtml = searchCardTemplate(game);
-
-      // Append the generated HTML to the cardsHtml string
-      cardsHTML += gameHtml;
-    }
-  
-    // Append the cards to an element in your HTML
     const cardsContainer = document.querySelector(".gameInventory");
-    if (cardsContainer) {
-    cardsContainer.innerHTML = cardsHTML;
-    console.log("Cards have been inserted into the DOM.");
-    } else {
-    console.log("Cards container not found.");
+    const pageNavigation = document.querySelector(".pagination");
+    if (pageNavigation) {
+      pageNavigation.innerHTML = ""; 
     }
+    cardsContainer.innerHTML = "<h1>Searching for your results!</h1>";
+    console.log("Searching for game:", searchValue);
+
+    const games = await service.fetchGameByName(searchValue);
+    // Check if the games array exists and has items
+    if (!games.boardgames || !games.boardgames.boardgame || games.boardgames.boardgame.length === 0) {
+      cardsContainer.innerHTML = "<h1>No games could be found by that name.</h1>";
+      console.log("No games found.");
+      return; // Exit the function early
+    }
+    const totalGames = games.boardgames.boardgame.length;
+
+    // Calculate start and end indices for the current page
+    const startIndex = (currentPage - 1) * 10;
+    const endIndex = startIndex + 10;
+
+    let cardsHTML = "";
+
+    // Loop through the games for the current page
+    for (let i = startIndex; i < endIndex && i < totalGames; i++) {
+      const gameitem = games.boardgames.boardgame[i];
+      console.log("Game item:", gameitem);
+      if (gameitem) {
+        const gameid = gameitem["@_objectid"];
+        const game = await service.fetchGameById(gameid);
+
+        // Generate the HTML for the current game
+        const gameHtml = searchCardTemplate(game);
+
+        // Append the generated HTML to the cardsHtml string
+        cardsHTML += gameHtml;
+      }
+    }
+
+    // Append the cards to an element in your HTML
+    if (cardsContainer) {
+      cardsContainer.innerHTML = cardsHTML;
+      console.log("Cards have been inserted into the DOM.");
+    } else {
+      console.log("Cards container not found.");
+    }
+
+    // Add pagination controls
+    addPaginationControls(totalGames);
   } catch (error) {
     console.error("Error fetching game details:", error);
   }
 }
 
+function addPaginationControls(totalGames) {
+  const paginationContainer = document.querySelector(".pagination");
+  if (!paginationContainer) return;
+
+  paginationContainer.innerHTML = ""; // Clear existing controls
+
+  // Add "Previous" button
+  if (currentPage > 1) {
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.addEventListener("click", () => {
+      currentPage--;
+      gameByName(document.querySelector("#search").value); // Re-fetch results
+    });
+    paginationContainer.appendChild(prevButton);
+  }
+
+  // Add "Next" button
+  if (currentPage * 10 < totalGames) {
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.addEventListener("click", () => {
+      currentPage++;
+      gameByName(document.querySelector("#search").value); // Re-fetch results
+    });
+    paginationContainer.appendChild(nextButton);
+  }
+}
 
 function searchCardTemplate(game) {
   console.log("Game object:", game);
@@ -199,4 +247,15 @@ function searchCardTemplate(game) {
     </div>
   `;
   return string;
+}
+
+// set local storage
+export function setLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value)); // Convert value to JSON string
+}
+
+// get local storage
+export function getLocalStorage(key) {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : null; // Parse JSON string back to object/array
 }
