@@ -31,9 +31,9 @@ export default class ExternalServices {
             const formattedGames = games.map(game => ({
                 id: game["@_id"],
                 rank: game["@_rank"],
-                name: game.name["@_value"], // Access the name property inside the object
-                thumbnail: game.thumbnail["@_value"], // Access the thumbnail URL
-                year: game.yearpublished["@_value"] // Access the year published
+                name: game.name["@_value"], 
+                thumbnail: game.thumbnail["@_value"], 
+                year: game.yearpublished["@_value"] 
             }));
 
             return formattedGames;
@@ -92,7 +92,6 @@ export default class ExternalServices {
 
 // Convert XML string to JSON using fast-xml-parser
 async function convertXMLtoJSON(xml) {
-    // Initialize the XML parser
     const parser = new XMLParser({
         ignoreAttributes: false, // Ensure attributes are not ignored
         attributeNamePrefix: "@_", // Add a prefix to attributes (optional)
