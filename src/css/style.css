@@ -3,7 +3,7 @@
   /* colors */
   --primary-color: #e6aa68;
   --secondary-color: #4f3824;
-  --tertiary-color: #d33e43;
+  --tertiary-color: #a6080d;
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
 
@@ -76,7 +76,11 @@ header {
   text-decoration: none;
   color: var(--secondary-color);
 }
-
+ .navbar a:hover {
+  color: var(--tertiary-color);
+  text-decoration: underline;
+  text-decoration-color: var(--tertiary-color);
+}
 /* divider styling */
 .divider {
   border-bottom: 2px solid var(--primary-color);
@@ -100,6 +104,7 @@ h1 {
 }
 #topBoardGame {
   border: 3px solid var(--primary-color);
+  border-radius: 25px;
   max-width: 300px;
   min-height: 400px;
   flex: 1 1 300px;
@@ -150,6 +155,7 @@ h1 {
 }
 .searchBoardGame {
   border: 3px solid var(--primary-color);
+  border-radius: 25px;
   max-width: 300px;
   min-height: 400px;
   flex: 1 1 300px;
