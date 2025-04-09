@@ -6,9 +6,9 @@ export function setPageTitle(title) {
     }
   }
   
-  // Example usage: Set the title based on the page content
+  // Set the title based on the page content
   export function setDynamicPageTitle() {
-    const pageHeader = document.querySelector("h1"); // Assume the page has an <h1> element
+    const pageHeader = document.querySelector("h1"); 
     if (pageHeader) {
       setPageTitle(`The Game | ${pageHeader.textContent.trim()}`); // Use the <h1> text as the title
     } else {

@@ -8,17 +8,16 @@ if (searchInput && searchButton) {
   const handleSearch = () => {
     const searchValue = searchInput.value.trim();
     if (searchValue) {
-      // console.log("Searching for game:", searchValue);
       gameByName(searchValue);
     } else {
       alert("Please enter a search term.");
     }
   };
 
-  // Add event listener for button click
+  // event listener for button click
   searchButton.addEventListener("click", handleSearch);
 
-  // Add event listener for Enter key press
+  //event listener for Enter key press
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault(); // Prevent the default form submission behavior
